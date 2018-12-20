@@ -10,7 +10,7 @@
     <title>reveal.js</title>
 
     <link rel="stylesheet" href="css/reveal.css" />
-    <link rel="stylesheet" href="css/theme/black.css" />
+    <link rel="stylesheet" href="css/theme/night.css" />
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/zenburn.css" />
@@ -25,12 +25,399 @@
         : "css/print/paper.css";
       document.getElementsByTagName("head")[0].appendChild(link);
     </script>
+    <style>
+      .reveal img.nobg {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+      }
+      .reveal p > code {
+        background-color: rgb(63, 63, 63);
+        font-size: 0.85em;
+        padding: 0 5px;
+      }
+      .reveal .img-fallback-without-style {
+        border: none;
+        background: none;
+      }
+      .reveal .img-fallback-with-style {
+        text-align: center;
+        font-weight: bold;
+        position: relative;
+        text-indent: 8px;
+        border: none;
+      }
+      .reveal .img-fallback-with-style:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 100%;
+        background-color: rgb(52, 52, 52);
+        background-image: url("img/baseline-error_outline.svg");
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .reveal table td {
+        vertical-align: middle;
+      }
+    </style>
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
-        <section data-background=""><h1>Images in web</h1></section>
-        <section>Slide 2</section>
+        <section data-background="img/landscape.jpg">
+          <h1>Images in web</h1>
+        </section>
+        <section>
+          <section>
+            <h3>Formats</h3>
+            <table>
+              <thead>
+                <th></th>
+                <th>jpg</th>
+                <th>png</th>
+                <th>gif</th>
+                <th>svg</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Vector</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>&#10004;</td>
+                </tr>
+                <tr>
+                  <th>Raster</th>
+                  <td>&#10004;</td>
+                  <td>&#10004;</td>
+                  <td>&#10004;</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Transparency</th>
+                  <td></td>
+                  <td>&#10004;</td>
+                  <td>&#10004;</td>
+                  <td>&#10004;</td>
+                </tr>
+                <tr>
+                  <th>Animation</th>
+                  <td></td>
+                  <td></td>
+                  <td>&#10004;</td>
+                  <td>&#10004;</td>
+                </tr>
+                <tr>
+                  <th>Lossy</th>
+                  <td>&#10004;</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section>
+            <h3>jpg</h3>
+            <p>Best compression for pictures</p>
+            <small>Use it for photography</small>
+          </section>
+          <section>
+            <h3>png</h3>
+            <p>Supports alpha channel</p>
+            <small>Use it when an image has transparency</small>
+          </section>
+          <section>
+            <h3>gif</h3>
+            <p>Limited color palette of 256 color</p>
+            <p>Has animation support</p>
+            <small>Use it for small animated images</small>
+          </section>
+          <section>
+            <h3>svg</h3>
+            <p>XML vector image format</p>
+            <small>Use it for icons or vector images</small>
+            <ul>
+              <li>It's accessible (has description and title tags)</li>
+              <li>It can be handled by CSS and Javascript</li>
+              <li>It's readable</li>
+              <li>You can write it!</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Tags</h3>
+            <ul>
+              <li>img</li>
+              <li>picture</li>
+              <li>background-image</li>
+              <li>object</li>
+            </ul>
+          </section>
+          <section>
+            <h3>img attributes</h3>
+            <dl>
+              <dt><code>src</code></dt>
+              <dd><p>Points to a single file.</p></dd>
+              <dt><code>srcset</code></dt>
+              <dd><p>Declare different images and sizes</p></dd>
+              <dt><code>sizes</code></dt>
+              <dd>
+                <p>
+                  Says which image should be used by the browser in each screen
+                  size.
+                </p>
+              </dd>
+              <dt><code>alt</code></dt>
+              <dd><p>Descriptive text of the image</p></dd>
+            </dl>
+          </section>
+          <section>
+            <h3>img example</h3>
+            <pre>
+              <code class="hljs xml">
+<img 
+  srcset='
+    image-480px.jpg 480w,
+    image-1920px.jpg 1920w'
+  sizes='
+    (max-width: 480px) 480px,
+    (max-width: 1920px) 1920px'
+  src='image-1920px.jpg' 
+  alt='A beautyful landscape'
+/>
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Styled fallback</h3>
+            <img class="img-fallback-without-style" alt="Alt text" />
+            <span
+              style="margin: 0 10px;
+                font-size: 80px;
+                line-height: 10px;"
+            >
+              &#x2192;
+            </span>
+            <img class="img-fallback-with-style" alt="Alt text" />
+            <p></p>
+          </section>
+          <section>
+            <h3>background-image</h3>
+            <p>
+              You load an image with css when it is part of the style or part of
+              the background.
+            </p>
+            <figure
+              style="
+              position: relative;
+              display: block;
+              max-width: 300px;
+              max-height: 200px;
+              float: none;
+              margin: auto;"
+            >
+              <img src="img/landscape.jpg" alt="image" />
+              <figcaption
+                style="
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                margin: 8px;"
+              >
+                <small>image</small>
+              </figcaption>
+            </figure>
+            <div
+              class="fade-in"
+              style="
+                width: 100%; 
+                height: 100%; 
+                position: absolute; 
+                top:0; 
+                bottom:0; 
+                left: 0; 
+                right:0; 
+                background-image:url(img/landscape.jpg); 
+                z-index: -1; 
+                background-size: cover;
+                display: flex;
+                align-items: flex-end;
+                justify-content: flex-end;"
+            >
+              <small>background-image</small>
+            </div>
+          </section>
+          <section>
+            <table>
+              <thead>
+                <th>background-image</th>
+                <th>img</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>background-size</td>
+                  <td>object-fit</td>
+                </tr>
+                <tr>
+                  <td>background-position</td>
+                  <td>object-position</td>
+                </tr>
+                <tr>
+                  <td>background-repeat</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>background-blend-mode</td>
+                  <td>mix-blend-mode</td>
+                </tr>
+                <tr>
+                  <td>css media-queries</td>
+                  <td>picture</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section>
+            <h3>picture</h3>
+            <p>
+              Picture has different sources and shows the one which match the
+              rules.
+            </p>
+            <pre>
+<code 
+	class="hljs xml"
+	style="font-size: 18px"
+>
+<picture>
+	<source 
+		srcset="img-big.jpg" 
+		media="(min-width: 1200px)"
+	>
+	<source 
+		srcset="img.jpg" 
+		media="(min-width: 900px)"
+	>
+	<img src="img-fallback.jpg" alt="">
+</picture>
+</code>
+						</pre>
+            <p>
+              It doesn't get images that don't match the
+              <code>media</code> criteria so avoids overloading.
+            </p>
+          </section>
+          <section>
+            <h3>img vs picture</h3>
+            <figure>
+              <figcaption>
+                <p>Picture is the art direction of an img.</p>
+                <p>It loads the according file.</p>
+              </figcaption>
+              <img
+                class="nobg"
+                height="200px"
+                src="img/desktop-image.png"
+                alt="desktop image"
+              />
+              <img
+                class="nobg"
+                style="
+                  background-color: transparent;
+                  border: none;
+                  box-shadow: none;"
+                height="200px"
+                src="img/mobile-image.png"
+                alt="mobile image"
+              />
+            </figure>
+          </section>
+          <section>
+            <h3>object</h3>
+            <pre><code class="hljs xml">
+              <object data="img/not-found.jpg">
+                <img src="img/fallback-img.jpg"/>
+              </object>
+            </code></pre>
+            <p>
+              If object's <code>data</code> is not found will show the inside
+              content as fallback.
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <p>A new format:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>webp</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Vector</th>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Raster</th>
+                  <td>&#10004;</td>
+                </tr>
+                <tr>
+                  <th>Transparency</th>
+                  <td>&#10004;</td>
+                </tr>
+                <tr>
+                  <th>Animation</th>
+                  <td>&#10004;</td>
+                </tr>
+                <tr>
+                  <th>Lossy</th>
+                  <td>&#10004;</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section>
+            <ul>
+              <li>Better compression than JPG</li>
+              <li>Has transparency</li>
+              <li>Safari and IE doesn't support it (yet)</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Compression Comparison</h3>
+            <table>
+              <thead>
+                <th></th>
+                <th>jpg</th>
+                <th>png</th>
+                <th>gif</th>
+                <th>webp</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>
+                    <figure>
+                      <img width="200" src="img/landscape.jpg" />
+                      <figcaption><small>1920x1080</small></figcaption>
+                    </figure>
+                  </th>
+                  <td>1,3MB</td>
+                  <td>3,2MB</td>
+                  <td>1,8MB</td>
+                  <td>1,2MB</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </section>
       </div>
     </div>
 
